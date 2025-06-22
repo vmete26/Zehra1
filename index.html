@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yolculuk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fdf5e6;
+      font-family: 'Gloria Hallelujah', cursive;
+      color: #333;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #ffffffd5;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .message {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    button {
+      background-color: #d9b99b;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a97c50;
+      color: white;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="step1" class="message">
+      <strong>Merhabalar, devam etmek istiyor musunuz?</strong><br>
+      <button onclick="step2(true)">Evet</button>
+      <button onclick="step2(false)">Hayır</button>
+    </div>
+
+    <div id="step2" class="message hidden">
+      <strong>Emin misin?</strong><br>
+      <button onclick="step3(true)">Evet</button>
+      <button onclick="step3(false)">Hayır</button>
+    </div>
+
+    <div id="end1" class="message hidden">
+      <strong>Ne yazık ki devam edemiyorum.</strong>
+    </div>
+
+    <div id="end2" class="message hidden">
+      <strong>Yolculuk sona erdi.</strong>
+    </div>
+
+    <div id="step3" class="message hidden">
+      <strong>Bir sonraki sorudaki parola için ipucu ister misin?</strong><br>
+      <button onclick="step4(true)">Evet</button>
+      <button onclick="step4(false)">Hayır</button>
+    </div>
+
+    <div id="step4" class="message hidden">
+      <strong>İpucu: Mete'nin hayalindeki ülke</strong><br><br>
+      <button onclick="showPasswordInput()">Devam et</button>
+    </div>
+
+    <div id="passwordInput" class="message hidden">
+      <strong>Lütfen şifreyi girin:</strong><br>
+      <input type="text" id="password" placeholder="Şifreyi yaz...">
+      <button onclick="checkPassword()">Gönder</button>
+    </div>
+
+    <div id="finalMessage" class="message hidden">
+      <p><strong>Evet ela gözlü PremiumKaradeniz</strong>, biliyorum bir yıl boyunca uğraşıp belki bazen sinirli, stresli, yorgun; belki mutlu ama sonucunda bitirdiğin maratonun sonuna geldin. Seni bu başarından dolayı <strong>tebrik ediyorum</strong> ve bu kısa da olsa tanıştığımız süre zarfında seninle konuşmaktan onur ve mutluluk duyduğumu ve bence birbirimizi mükemmel tanıdığımızı bilmeni isterim. Eğer sınavdan başarısız olsan da hiç önemli değil, hayatını bu sınava bağlamayacak kadar mükemmel birisin. Umarım her şey gönlünce olur. <strong>İstersen birlikte bölümde araştırabiliriz.</strong><br><br>
+      – <em>HızırVeli26</em></p>
+    </div>
+  </div>
+
+  <script>
+    function step2(answer) {
+      document.getElementById("step1").classList.add("hidden");
+      if (answer) {
+        document.getElementById("step2").classList.remove("hidden");
+      } else {
+        document.getElementById("end1").classList.remove("hidden");
+      }
+    }
+
+    function step3(answer) {
+      document.getElementById("step2").classList.add("hidden");
+      if (answer) {
+        document.getElementById("step3").classList.remove("hidden");
+      } else {
+        document.getElementById("end2").classList.remove("hidden");
+      }
+    }
+
+    function step4(wantsHint) {
+      document.getElementById("step3").classList.add("hidden");
+      if (wantsHint) {
+        document.getElementById("step4").classList.remove("hidden");
+      } else {
+        showPasswordInput();
+      }
+    }
+
+    function showPasswordInput() {
+      document.getElementById("step4").classList.add("hidden");
+      document.getElementById("passwordInput").classList.remove("hidden");
+    }
+
+    function checkPassword() {
+      const correctPassword = "İsveç";
+      const userInput = document.getElementById("password").value.trim();
+      if (userInput.toLowerCase() === correctPassword.toLowerCase()) {
+        document.getElementById("passwordInput").classList.add("hidden");
+        document.getElementById("finalMessage").classList.remove("hidden");
+      } else {
+        alert("Şifre yanlış! Lütfen tekrar dene.");
+      }
+    }
+  </script>
+</body>
+</html>
